@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Primer Añito - Caetana Celeste</title>
+
+  <!-- PRECARGA DE IMÁGENES CRÍTICAS -->
+  <link rel="preload" as="image" href="https://i.postimg.cc/63ZGntPf/fondo-convertido.jpg">
+  <link rel="preload" as="image" href="https://i.postimg.cc/BZRt2jfs/Chat-GPT-Image-6-sept-2026-03-47-00-p-m.jpg">
+  <link rel="preload" as="image" href="https://i.postimg.cc/0QMPNCQx/Captura-de-pantalla-2026-09-06-165327.jpg">
+  <link rel="preload" as="image" href="https://i.postimg.cc/BZDx1BWh/foto-convertida.jpg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --rosa: #F6D7E7;
+      --rosa2: #E9B8CF;
+      --dorado: #CFAF6E;
+      --texto: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--texto);
+      overflow-x: hidden;
+      background: #fff;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    /* PORTADA BASE (COMPUTADORA) */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .15)),
+                  url('https://i.pinimg.com/1200x/28/3f/13/283f134b1906892f2bf263c7114dda0e.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ESTILO TRASLÚCIDO UNIFICADO PARA TODOS LOS CUADROS */
+    .hero-box, .mensaje-box, .event-card {
+      background: rgba(255, 255, 255, 0.68);
+      padding: 40px;
+      border-radius: 25px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 70px;
+      font-family: 'Playfair Display', serif;
+      color: #b54f82;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+
+    .hero h2 {
+      font-size: 26px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* BOTÓN DE MÚSICA */
+    .hero-music-btn {
+      margin-top: 25px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #d887af, #c86c9a);
+      color: white;
+      border: 2px solid #ffffff;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(200, 108, 154, 0.35);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-music-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 25px rgba(200, 108, 154, 0.5);
+      background: linear-gradient(135deg, #c86c9a, #b35687);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(216, 135, 175, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(216, 135, 175, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(216, 135, 175, 0);
+      }
+    }
+
+    .countdown {
+      background: var(--rosa);
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      width: 120px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
+    }
+
+    .card span {
+      font-size: 40px;
+      font-weight: bold;
+      display: block;
+    }
+
+    /* SECCIÓN MARIPOSAS BASE (COMPUTADORA) */
+    .seccion-mariposas {
+      background-image: url('https://i.postimg.cc/63ZGntPf/fondo-convertido.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 100px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mariposas-container {
+      max-width: 750px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 28px;
+      background: #d887af;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: background 0.3s ease;
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background: #c86c9a;
+    }
+
+    .gallery {
+      background: #faf5f8;
+    }
+
+    .grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 10px;
+      flex-wrap: wrap;
+    }
+
+    .grid img {
+      width: 280px;
+      height: 400px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 20px;
+    }
+
+    .whatsapp {
+      background: #25D366;
+    }
+
+    .whatsapp a {
+      background: white;
+      color: #25D366;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    footer {
+      padding: 30px;
+      background: #f4f4f4;
+    }
+
+    /* VISTA ADAPTADA A CELULARES */
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .1)),
+                          url('https://i.postimg.cc/BZRt2jfs/Chat-GPT-Image-6-sept-2026-03-47-00-p-m.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 50px 15px;
+      }
+
+      .hero-box, .mensaje-box, .event-card {
+        width: 100%;
+        padding: 30px 18px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .seccion-mariposas {
+        background-image: url('https://i.postimg.cc/0QMPNCQx/Captura-de-pantalla-2026-09-06-165327.jpg');
+        background-size: cover;
+        background-position: center center;
+        padding: 60px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- AUDIO -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://files.catbox.moe/vulkqn.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- PORTADA -->
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Caetana Celeste</h1>
+      <h2>Mi Primer Añito</h2>
+      <p style="margin-top: 5px; font-weight: 500;">26 de setiembre del 2026</p>
+
+      <button id="music-toggle" class="hero-music-btn" aria-label="Reproducir Música">
+        <span id="music-icon">🎵</span>
+        <span id="music-text">Reproducir música</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <section class="countdown" data-aos="fade-up">
+    <h2>Faltan...</h2>
+    <div class="cards">
+      <div class="card">
+        <span id="dias">00</span> Días
+      </div>
+      <div class="card">
+        <span id="horas">00</span> Horas
+      </div>
+      <div class="card">
+        <span id="minutos">00</span> Minutos
+      </div>
+      <div class="card">
+        <span id="segundos">00</span> Segundos
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN UNIFICADA CON FONDO DE MARIPOSAS -->
+  <section class="seccion-mariposas" data-aos="fade-up">
+    <div class="mariposas-container">
+      
+      <!-- TE ESPERAMOS -->
+      <div class="mensaje-box">
+        <h2 style="color: #b54f82;">Te esperamos</h2>
+        <br>
+        <p style="font-size: 16px; line-height: 1.6; font-weight: 500;">
+          Acompáñanos a celebrar el primer añito de nuestra querida Caetana Celeste.<br>
+          Será una tarde llena de alegría, juegos, sorpresas y mucho amor.
+        </p>
+      </div>
+
+      <!-- DETALLES DEL EVENTO -->
+      <div class="event-card">
+        <h2 style="color: #b54f82;">Detalles del Evento</h2>
+        <br>
+        <p style="font-size: 16px;"><b>Fecha:</b> 26 de setiembre del 2026</p>
+        <p style="margin-top: 5px; font-size: 16px;"><b>Hora:</b> 3:00 PM</p>
+        <p style="margin-top: 5px; font-size: 16px;"><b>Dirección:</b> Calle Mar Adriático 105, Urb. Neptuno, Surco</p>
+
+        <a class="btn" target="_blank" 
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=1er+A%C3%B1ito+de+Caetana+Celeste&dates=20260926T200000Z/20260927T010000Z&details=Acomp%C3%A1%C3%B1anos+a+celebrar+el+primer+a%C3%B1ito+de+nuestra+querida+Caetana+Celeste.&location=Calle+Mar+Adri%C3%A1tico+105%2C+Urb.+Neptuno%2C+Surco">
+          Agregar al calendario
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="gallery" data-aos="fade-up">
+    <h2>Nuestra Princesa</h2>
+    <div class="grid">
+      <img src="https://i.postimg.cc/gJb895QJ/ce78d6b3-0b83-44bd-a696-0747da017ed0.jpg" alt="Caetana Celeste Foto 1" loading="eager" decoding="async">
+      <img src="https://i.postimg.cc/BZDx1BWh/foto-convertida.jpg" alt="Caetana Celeste Foto 2" loading="eager" decoding="async">
+      <img src="https://i.postimg.cc/BZMLNXSx/a222e050-ca0c-4a75-8efb-eca3b84e91a3.jpg" alt="Caetana Celeste Foto 3" loading="eager" decoding="async">
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="map">
+    <h2>¿Dónde será?</h2>
+    <br>
+    <iframe src="https://maps.google.com/maps?q=Calle%20Mar%20Adriatico%20105,%20Surco&t=&z=16&ie=UTF8&iwloc=&output=embed">
+    </iframe>
+  </section>
+
+  <!-- WHATSAPP -->
+  <section class="whatsapp">
+    <h2 style="color:white">Confirma tu asistencia</h2>
+    <br>
+    <a target="_blank" href="https://wa.me/51954586581?text=Confirmo%20mi%20asistencia%20al%20cumplea%C3%B1os%20de%20Caetana%20:)">
+      Confirmar por WhatsApp
+    </a>
+  </section>
+
+  <footer>
+    Hecho con amor para Caetana Celeste ❤️
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    const music = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-toggle");
+    const musicIcon = document.getElementById("music-icon");
+    const musicText = document.getElementById("music-text");
+
+    musicBtn.addEventListener("click", () => {
+      if (!music.paused) {
+        music.pause();
+        musicIcon.textContent = "🎵";
+        musicText.textContent = "Reproducir música";
+      } else {
+        musicText.textContent = "Cargando...";
+        music.play().then(() => {
+          musicIcon.textContent = "🔊";
+          musicText.textContent = "Pausar música";
+        }).catch(error => {
+          console.error("Error al reproducir audio:", error);
+          alert("No se pudo reproducir el audio. Verifica tu enlace de música.");
+          musicIcon.textContent = "🎵";
+          musicText.textContent = "Reproducir música";
+        });
+      }
+    });
+
+    const fechaEvento = new Date("Sep 26, 2026 15:00:00").getTime();
+
+    const timer = setInterval(() => {
+      const ahora = new Date().getTime();
+      const distancia = fechaEvento - ahora;
+
+      if (distancia < 0) {
+        clearInterval(timer);
+        document.getElementById("dias").innerHTML = "00";
+        document.getElementById("horas").innerHTML = "00";
+        document.getElementById("minutos").innerHTML = "00";
+        document.getElementById("segundos").innerHTML = "00";
+        return;
+      }
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      document.getElementById("dias").innerHTML = String(dias).padStart(2, '0');
+      document.getElementById("horas").innerHTML = String(horas).padStart(2, '0');
+      document.getElementById("minutos").innerHTML = String(minutos).padStart(2, '0');
+      document.getElementById("segundos").innerHTML = String(segundos).padStart(2, '0');
+
+    }, 1000);
+  </script>
+
+</body>
+</html>
