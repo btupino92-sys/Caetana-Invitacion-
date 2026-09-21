@@ -43,6 +43,7 @@
 
     /* PORTADA BASE (COMPUTADORA) */
     .hero {
+      position: relative;
       height: 100vh;
       background: linear-gradient(rgba(255, 255, 255, .15), rgba(255, 255, 255, .15)),
                   url('https://i.pinimg.com/1200x/28/3f/13/283f134b1906892f2bf263c7114dda0e.jpg');
@@ -51,6 +52,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden; /* Mantiene las mariposas solo dentro de esta primera parte */
     }
 
     /* ESTILO TRASLÚCIDO UNIFICADO PARA TODOS LOS CUADROS */
@@ -64,6 +66,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 2;
     }
 
     .hero h1 {
@@ -114,6 +117,168 @@
       }
       100% {
         box-shadow: 0 0 0 0 rgba(216, 135, 175, 0);
+      }
+    }
+
+    /* CAPA DE MARIPOSAS EXCLUSIVA DE LA PORTADA */
+    .butterfly-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .butterfly {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      opacity: 0;
+      perspective: 600px;
+      filter: drop-shadow(0 4px 6px rgba(181, 79, 130, 0.25));
+    }
+
+    .butterfly-wing-left,
+    .butterfly-wing-right {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .butterfly-wing-left {
+      left: 0;
+      transform-origin: right center;
+      animation: flapLeft 0.35s ease-in-out infinite alternate;
+    }
+
+    .butterfly-wing-right {
+      right: 0;
+      transform-origin: left center;
+      animation: flapRight 0.35s ease-in-out infinite alternate;
+    }
+
+    @keyframes flapLeft {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(-65deg); }
+    }
+
+    @keyframes flapRight {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(65deg); }
+    }
+
+    /* TRAYECTORIAS Y DIRECCIONES DIVERSAS */
+    /* 1. Diagonal Abajo-Izquierda hacia Arriba-Derecha */
+    .butterfly-dir-1 {
+      animation: flight1 9s ease-in-out infinite;
+    }
+    @keyframes flight1 {
+      0% {
+        top: 85%;
+        left: -10%;
+        opacity: 0;
+        transform: scale(0.6) rotate(25deg);
+      }
+      15% { opacity: 0.9; }
+      85% { opacity: 0.9; }
+      100% {
+        top: -15%;
+        left: 105%;
+        opacity: 0;
+        transform: scale(1.1) rotate(20deg);
+      }
+    }
+
+    /* 2. De Derecha a Izquierda suavemente */
+    .butterfly-dir-2 {
+      animation: flight2 11s ease-in-out infinite 1.5s;
+    }
+    @keyframes flight2 {
+      0% {
+        top: 25%;
+        left: 110%;
+        opacity: 0;
+        transform: scale(0.8) rotate(-15deg);
+      }
+      20% { opacity: 1; }
+      50% { top: 40%; transform: scale(0.9) rotate(-30deg); }
+      80% { opacity: 0.9; }
+      100% {
+        top: 15%;
+        left: -15%;
+        opacity: 0;
+        transform: scale(0.7) rotate(-10deg);
+      }
+    }
+
+    /* 3. Desde Arriba-Izquierda cayendo y cruzando en S hacia Abajo-Derecha */
+    .butterfly-dir-3 {
+      animation: flight3 10s ease-in-out infinite 0.5s;
+    }
+    @keyframes flight3 {
+      0% {
+        top: -10%;
+        left: 10%;
+        opacity: 0;
+        transform: scale(0.7) rotate(45deg);
+      }
+      20% { opacity: 0.95; }
+      50% { left: 45%; top: 45%; transform: scale(1) rotate(15deg); }
+      80% { opacity: 0.9; }
+      100% {
+        top: 105%;
+        left: 85%;
+        opacity: 0;
+        transform: scale(0.8) rotate(35deg);
+      }
+    }
+
+    /* 4. Desde Abajo Subiendo Casi Vertical con ondas */
+    .butterfly-dir-4 {
+      animation: flight4 12s ease-in-out infinite 2.5s;
+    }
+    @keyframes flight4 {
+      0% {
+        top: 110%;
+        left: 50%;
+        opacity: 0;
+        transform: scale(0.7) rotate(-5deg);
+      }
+      25% { opacity: 0.9; left: 40%; }
+      60% { left: 60%; transform: scale(1.1) rotate(10deg); }
+      85% { opacity: 0.85; }
+      100% {
+        top: -15%;
+        left: 35%;
+        opacity: 0;
+        transform: scale(0.6) rotate(-15deg);
+      }
+    }
+
+    /* 5. Diagonal Abajo-Derecha hacia Arriba-Izquierda */
+    .butterfly-dir-5 {
+      animation: flight5 9.5s ease-in-out infinite 3s;
+    }
+    @keyframes flight5 {
+      0% {
+        top: 90%;
+        left: 110%;
+        opacity: 0;
+        transform: scale(0.8) rotate(-40deg);
+      }
+      20% { opacity: 1; }
+      80% { opacity: 0.85; }
+      100% {
+        top: -10%;
+        left: -10%;
+        opacity: 0;
+        transform: scale(1.1) rotate(-25deg);
       }
     }
 
@@ -262,6 +427,11 @@
         background-position: center center;
         padding: 60px 15px;
       }
+
+      .butterfly {
+        width: 36px;
+        height: 36px;
+      }
     }
   </style>
 </head>
@@ -275,6 +445,35 @@
 
   <!-- PORTADA -->
   <section class="hero">
+
+    <!-- MARIPOSAS REALISTAS DENTRO DE LA PORTADA -->
+    <div class="butterfly-container">
+      <div class="butterfly butterfly-dir-1">
+        <div class="butterfly-wing-left" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M50,50 C30,10 0,0 5,30 C10,50 35,55 50,50 C25,60 10,85 25,95 C40,100 48,70 50,50 Z\' fill=\'%23d887af\' stroke=\'%23b54f82\' stroke-width=\'1.5\'/></svg>');"></div>
+        <div class="butterfly-wing-right" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M0,50 C20,10 50,0 45,30 C40,50 15,55 0,50 C25,60 40,85 25,95 C10,100 2,70 0,50 Z\' fill=\'%23d887af\' stroke=\'%23b54f82\' stroke-width=\'1.5\'/></svg>');"></div>
+      </div>
+
+      <div class="butterfly butterfly-dir-2">
+        <div class="butterfly-wing-left" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M50,50 C30,10 0,0 5,30 C10,50 35,55 50,50 C25,60 10,85 25,95 C40,100 48,70 50,50 Z\' fill=\'%23e9b8cf\' stroke=\'%23c86c9a\' stroke-width=\'1.5\'/></svg>');"></div>
+        <div class="butterfly-wing-right" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M0,50 C20,10 50,0 45,30 C40,50 15,55 0,50 C25,60 40,85 25,95 C10,100 2,70 0,50 Z\' fill=\'%23e9b8cf\' stroke=\'%23c86c9a\' stroke-width=\'1.5\'/></svg>');"></div>
+      </div>
+
+      <div class="butterfly butterfly-dir-3">
+        <div class="butterfly-wing-left" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M50,50 C30,10 0,0 5,30 C10,50 35,55 50,50 C25,60 10,85 25,95 C40,100 48,70 50,50 Z\' fill=\'%23b54f82\' stroke=\'%238f3863\' stroke-width=\'1.5\'/></svg>');"></div>
+        <div class="butterfly-wing-right" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M0,50 C20,10 50,0 45,30 C40,50 15,55 0,50 C25,60 40,85 25,95 C10,100 2,70 0,50 Z\' fill=\'%23b54f82\' stroke=\'%238f3863\' stroke-width=\'1.5\'/></svg>');"></div>
+      </div>
+
+      <div class="butterfly butterfly-dir-4">
+        <div class="butterfly-wing-left" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M50,50 C30,10 0,0 5,30 C10,50 35,55 50,50 C25,60 10,85 25,95 C40,100 48,70 50,50 Z\' fill=\'%23d887af\' stroke=\'%23b54f82\' stroke-width=\'1.5\'/></svg>');"></div>
+        <div class="butterfly-wing-right" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M0,50 C20,10 50,0 45,30 C40,50 15,55 0,50 C25,60 40,85 25,95 C10,100 2,70 0,50 Z\' fill=\'%23d887af\' stroke=\'%23b54f82\' stroke-width=\'1.5\'/></svg>');"></div>
+      </div>
+
+      <div class="butterfly butterfly-dir-5">
+        <div class="butterfly-wing-left" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M50,50 C30,10 0,0 5,30 C10,50 35,55 50,50 C25,60 10,85 25,95 C40,100 48,70 50,50 Z\' fill=\'%23e9b8cf\' stroke=\'%23c86c9a\' stroke-width=\'1.5\'/></svg>');"></div>
+        <div class="butterfly-wing-right" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 100\'><path d=\'M0,50 C20,10 50,0 45,30 C40,50 15,55 0,50 C25,60 40,85 25,95 C10,100 2,70 0,50 Z\' fill=\'%23e9b8cf\' stroke=\'%23c86c9a\' stroke-width=\'1.5\'/></svg>');"></div>
+      </div>
+    </div>
+
     <div class="hero-box">
       <h1>Caetana Celeste</h1>
       <h2>Mi Primer Añito</h2>
@@ -375,11 +574,22 @@
   <script>
     AOS.init();
 
-    /* EFECTO DE SERPENTINAS AL ABRIR LA PÁGINA */
-    window.addEventListener('DOMContentLoaded', () => {
+    /* EFECTO DE SERPENTINAS/CONFETI AL ABRIR LA PÁGINA (COMPATIBLE CON PC Y MÓVILES) */
+    let confettiLaunched = false;
+
+    function launchConfetti() {
+      if (confettiLaunched) return;
+      confettiLaunched = true;
+
       const duration = 3.5 * 1000;
       const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+      const isMobile = window.innerWidth <= 768;
+      const defaults = { 
+        startVelocity: isMobile ? 25 : 35, 
+        spread: 360, 
+        ticks: isMobile ? 50 : 70, 
+        zIndex: 999 
+      };
 
       const interval = setInterval(function() {
         const timeLeft = animationEnd - Date.now();
@@ -388,9 +598,8 @@
           return clearInterval(interval);
         }
 
-        const particleCount = 50 * (timeLeft / duration);
+        const particleCount = (isMobile ? 30 : 50) * (timeLeft / duration);
 
-        // Serpentinas disparando desde la izquierda y la derecha
         confetti(Object.assign({}, defaults, { 
           particleCount, 
           origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
@@ -402,12 +611,20 @@
           colors: ['#F6D7E7', '#E9B8CF', '#CFAF6E', '#b54f82', '#ffffff']
         }));
       }, 250);
-    });
+    }
 
     function randomInRange(min, max) {
       return Math.random() * (max - min) + min;
     }
 
+    // Disparar inmediatamente al cargar
+    window.addEventListener('load', launchConfetti);
+    window.addEventListener('DOMContentLoaded', launchConfetti);
+    // Respaldo para táctiles en móviles
+    window.addEventListener('touchstart', launchConfetti, { once: true });
+    window.addEventListener('click', launchConfetti, { once: true });
+
+    /* CONTROL DE MÚSICA */
     const music = document.getElementById("bg-music");
     const musicBtn = document.getElementById("music-toggle");
     const musicIcon = document.getElementById("music-icon");
@@ -432,6 +649,7 @@
       }
     });
 
+    /* CONTADOR REGRESIVO */
     const fechaEvento = new Date("Sep 26, 2026 14:00:00").getTime();
 
     const timer = setInterval(() => {
